@@ -113,7 +113,7 @@ function registrarProducto() {
     
     // Validaciones
     if (!codigo || !fecha || !descripcion || !categoria || !precioCompra || !margen) {
-        alert(' Por favor completa los campos obligatorios (*)');
+        alert('❌ Por favor completa los campos obligatorios (*)');
         return;
     }
     
@@ -251,7 +251,7 @@ function crearTarjetaProducto(p, tipo) {
             ${p.bulto ? `<span class="tag">📦 ${p.bulto} unid/caja</span>` : ''}
             <span class="tag">Cantidad: ${p.cantidad}</span>
         </div>
-        ${p.proveedor ? `<div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;"> ${p.proveedor}</div>` : ''}
+        ${p.proveedor ? `<div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">🏪 ${p.proveedor}</div>` : ''}
         <div class="precios">
             <div>
                 <div style="font-size:0.8rem; color:var(--text-secondary);">Compra</div>
@@ -329,7 +329,7 @@ function verDetalle(id) {
     <div class="detalle-row"><span class="detalle-label">Margen:</span><span class="detalle-value">${p.margen}%</span></div>
     <div class="detalle-row"><span class="detalle-label">Precio Venta:</span><span class="detalle-value" style="color:var(--success); font-weight:bold; font-size:1.2rem;">$${p.precioVenta.toFixed(2)}</span></div>
     ${p.notas ? `<div class="detalle-row"><span class="detalle-label">Notas:</span><span class="detalle-value">${p.notas}</span></div>` : ''}
-    <div class="detalle-row"><span class="detalle-label">Estatus:</span><span class="detalle-value">${p.estatus === 'pendiente' ? '🔴 Pendiente' : ' Enviado'}</span></div>
+    <div class="detalle-row"><span class="detalle-label">Estatus:</span><span class="detalle-value">${p.estatus === 'pendiente' ? '🔴 Pendiente' : '🟢 Enviado'}</span></div>
     `;
     
     document.getElementById('modal-body').innerHTML = html;
@@ -340,7 +340,6 @@ function cerrarModal() {
     document.getElementById('modal-detalle').classList.remove('active');
     productoActual = null;
 }
-
 
 // ============================================
 // BÚSQUEDA
