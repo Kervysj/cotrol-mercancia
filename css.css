@@ -10,8 +10,6 @@
     --success: #10b981;
     --danger: #ef4444;
     --warning: #f59e0b;
-    --telegram: #0088cc;
-    --whatsapp: #25d366;
     --input-bg: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.08);
 }
@@ -613,7 +611,6 @@ body.dark-mode .form-group.highlight {
     margin: 15px 0;
 }
 
-
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .header-content {
@@ -623,10 +620,6 @@ body.dark-mode .form-group.highlight {
     
     .products-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .modal-actions {
-        flex-direction: column;
     }
     
     .tabs {
