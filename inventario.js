@@ -341,58 +341,6 @@ function cerrarModal() {
     productoActual = null;
 }
 
-// ============================================
-// COMPARTIR POR TELEGRAM
-// ============================================
-function compartirTelegram() {
-    if (!productoActual) return;
-    
-    const p = productoActual;
-    const texto = crearTextoProducto(p);
-    
-    const url = `https://t.me/share/url?url=&text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-}
-
-// ============================================
-// COMPARTIR POR WHATSAPP
-// ============================================
-function compartirWhatsApp() {
-    if (!productoActual) return;
-    
-    const p = productoActual;
-    const texto = crearTextoProducto(p);
-    
-    const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-}
-
-function crearTextoProducto(p) {
-    const fechaFormateada = new Date(p.fecha).toLocaleDateString('es-ES', {
-        year: 'numeric', month: 'long', day: 'numeric'
-    });
-    
-    let texto = ` *PRODUCTO*\n\n`;
-    texto += `🔹 Código: ${p.codigo}\n`;
-    texto += `📅 Fecha: ${fechaFormateada}\n`;
-    texto += `📝 Descripción: ${p.descripcion}\n`;
-    texto += `🏷️ Categoría: ${p.categoria}\n`;
-    
-    if (p.talla) texto += ` Talla: ${p.talla}\n`;
-    if (p.color) texto += `🎨 Color: ${p.color}\n`;
-    if (p.proveedor) texto += `🏪 Proveedor: ${p.proveedor}\n`;
-    if (p.bulto) texto += `📦 Por caja: ${p.bulto} unidades\n`;
-    texto += `🔢 Cantidad: ${p.cantidad}\n\n`;
-    
-    texto += `💰 *PRECIOS*\n`;
-    texto += `Compra: $${p.precioCompra.toFixed(2)}\n`;
-    texto += `Margen: ${p.margen}%\n`;
-    texto += `Venta: $${p.precioVenta.toFixed(2)}\n`;
-    
-    if (p.notas) texto += `\n📝 Notas: ${p.notas}\n`;
-    
-    return texto;
-}
 
 // ============================================
 // BÚSQUEDA
