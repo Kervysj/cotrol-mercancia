@@ -44,12 +44,12 @@ function checkTheme() {
 // ============================================
 // NAVEGACIÓN DE TABS
 // ============================================
-function cambiarTab(tab) {
+function cambiarTab(tab, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     
     document.getElementById('tab-' + tab).classList.add('active');
-    event.target.classList.add('active');
+    btn.classList.add('active');
     
     if (tab === 'pendientes') renderizarPendientes();
     if (tab === 'historial') renderizarHistorial();
@@ -113,7 +113,7 @@ function registrarProducto() {
     
     // Validaciones
     if (!codigo || !fecha || !descripcion || !categoria || !precioCompra || !margen) {
-        alert('❌ Por favor completa los campos obligatorios (*)');
+        alert(' Por favor completa los campos obligatorios (*)');
         return;
     }
     
@@ -164,7 +164,8 @@ function registrarProducto() {
     actualizarContadores();
     
     // Ir a pendientes
-    document.querySelectorAll('.tab-btn')[1].click();
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    cambiarTab('pendientes', tabBtns[1]);
 }
 
 function limpiarFormulario() {
@@ -250,7 +251,7 @@ function crearTarjetaProducto(p, tipo) {
             ${p.bulto ? `<span class="tag">📦 ${p.bulto} unid/caja</span>` : ''}
             <span class="tag">Cantidad: ${p.cantidad}</span>
         </div>
-        ${p.proveedor ? `<div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">🏪 ${p.proveedor}</div>` : ''}
+        ${p.proveedor ? `<div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;"> ${p.proveedor}</div>` : ''}
         <div class="precios">
             <div>
                 <div style="font-size:0.8rem; color:var(--text-secondary);">Compra</div>
@@ -263,7 +264,7 @@ function crearTarjetaProducto(p, tipo) {
         </div>
         <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">📅 ${fechaFormateada}</div>
         <div class="acciones">
-            <button class="btn-detalle" onclick="verDetalle(${p.id})">️ Detalle</button>
+            <button class="btn-detalle" onclick="verDetalle(${p.id})">👁️ Detalle</button>
             ${tipo === 'pendiente' ? 
                 `<button class="btn-enviar" onclick="marcarEnviado(${p.id})">✓ Enviado</button>` :
                 `<button class="btn-eliminar" onclick="eliminarProducto(${p.id})">🗑️ Eliminar</button>`
@@ -328,7 +329,7 @@ function verDetalle(id) {
     <div class="detalle-row"><span class="detalle-label">Margen:</span><span class="detalle-value">${p.margen}%</span></div>
     <div class="detalle-row"><span class="detalle-label">Precio Venta:</span><span class="detalle-value" style="color:var(--success); font-weight:bold; font-size:1.2rem;">$${p.precioVenta.toFixed(2)}</span></div>
     ${p.notas ? `<div class="detalle-row"><span class="detalle-label">Notas:</span><span class="detalle-value">${p.notas}</span></div>` : ''}
-    <div class="detalle-row"><span class="detalle-label">Estatus:</span><span class="detalle-value">${p.estatus === 'pendiente' ? '🔴 Pendiente' : '🟢 Enviado'}</span></div>
+    <div class="detalle-row"><span class="detalle-label">Estatus:</span><span class="detalle-value">${p.estatus === 'pendiente' ? '🔴 Pendiente' : ' Enviado'}</span></div>
     `;
     
     document.getElementById('modal-body').innerHTML = html;
@@ -371,16 +372,16 @@ function crearTextoProducto(p) {
         year: 'numeric', month: 'long', day: 'numeric'
     });
     
-    let texto = `📦 *PRODUCTO*\n\n`;
-    texto += ` Código: ${p.codigo}\n`;
+    let texto = ` *PRODUCTO*\n\n`;
+    texto += `🔹 Código: ${p.codigo}\n`;
     texto += `📅 Fecha: ${fechaFormateada}\n`;
     texto += `📝 Descripción: ${p.descripcion}\n`;
     texto += `🏷️ Categoría: ${p.categoria}\n`;
     
-    if (p.talla) texto += `📏 Talla: ${p.talla}\n`;
+    if (p.talla) texto += ` Talla: ${p.talla}\n`;
     if (p.color) texto += `🎨 Color: ${p.color}\n`;
-    if (p.proveedor) texto += ` Proveedor: ${p.proveedor}\n`;
-    if (p.bulto) texto += ` Por caja: ${p.bulto} unidades\n`;
+    if (p.proveedor) texto += `🏪 Proveedor: ${p.proveedor}\n`;
+    if (p.bulto) texto += `📦 Por caja: ${p.bulto} unidades\n`;
     texto += `🔢 Cantidad: ${p.cantidad}\n\n`;
     
     texto += `💰 *PRECIOS*\n`;
